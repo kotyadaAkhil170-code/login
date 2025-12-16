@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserve Table - Tamilisai</title>
+  
+<style>
+  /* ✅ General Body & Container Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f7f6;
+  color: #333;
+  line-height: 1.6;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: fixed;
+}
+
+
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ✅ Header Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 60px;
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: 700;
+  color: #d90429;
+}
+
+.main-header .logo {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* ✅ Navigation Links */
+.nav-links {
+  display: flex;
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links ul li {
+  margin-left: 20px;
+}
+
+.nav-links ul li a {
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.nav-links ul li a:hover {
+  color: #f39c12;
+}
+
+/* ✅ Hamburger Icon */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #d90429;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.hamburger:hover span {
+  background-color: #d90429;
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ✅ Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  background: url('../images/hero-bg.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  flex-direction: column;
+}
+
+.hero-content {
+  text-align: center;
+  color: #fff;
+  padding: 40px;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-logo {
+  width: 200px;
+  margin-bottom: 0rem;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+/* ✅ Hero Buttons */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: transparent;
+  justify-content: center;
+  position:center;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #d90429;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn-outline:hover {
+  background: #fff;
+  color: #d90429;
+}
+
+/* ✅ Booking Section */
+.booking-section {
+  text-align: center;
+  padding: 20px;
+}
+
+/* ✅ Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 80px; /* Idhai ippo 80px nu mathirukkom. Unga navbar height-kku etra madhiri adjust pannikalam */
+    right: 0;
+    background: #333;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 0;
+    overflow-y: auto;
+    z-index: 999;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero {
+    padding: 120px 20px 60px;
+    text-align: center;
+    height: 100vh;
+    min-height: auto;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+  .btn, .btn-outline {
+    width: 80%;
+    max-width: 300px;
+    font-size: 1rem;
+  }
+
+  .logo-text {
+    font-size: 20px;
+  }
+}
+
+.booking-section {
+    text-align: center;
+    padding: 20px;
+}
+
+/* ✅ Scroll wrapper with extra space below for visibility */
+.booking-scroll {
+  width: 100%;
+  max-height: 100vh;
+  overflow: auto;
+  padding-bottom: 80px; /* Ensures bottom tables are not hidden */
+}
+
+/* ✅ Club layout blueprint */
+.booking-map {
+  position: relative;
+  width: 100%;
+  max-width: 1050px;
+  aspect-ratio: 3215 / 1734;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto;
+  border-radius: 8px;
+  /* Border around the layout section */
+  border: 3px solid #d90429;
+  border-radius: 10px;
+}
+/* Prevent oversized clickable zone */
+.table-wrapper {
+  width: auto;
+  height: auto;
+  min-width: 64px;
+  min-height: 64px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+}
+
+/* ✅ Vertical Table Wrapper - Matches Horizontal Size */
+.table-wrapper.vertical {
+  width: 64px;           /* same as horizontal */
+  height: 64px;          /* same as horizontal */
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+/* ✅ Table number & price styling */
+.table-info {
+  font-size: 11px;
+  color: #00ff37;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.table-wrapper.vertical .table-info {
+  margin-left: 6px;
+  margin-bottom: 0;
+  text-align: left;
+}
+.table-price {
+  font-size: 10px;
+  color: #000000;
+  display: block;
+}
+
+/* 🔲 Table Box (Pink) */
+.table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background-color: rgba(255, 0, 255, 0.25);
+  border-radius: 6px;
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+/* ✅ Vertical Table (Pink Box) */
+.table-wrapper.vertical .table {
+  width: 20px;           /* same as wrapper */
+  height: 64px;
+  padding: 4px;
+  background-color: rgba(255, 0, 255, 0.25);
+  display: flex;
+  flex-direction: column;  /* stack seats vertically */
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  position: relative;
+}
+/* ✅ Chair container: horizontal & vertical */
+.seats {
+  display: flex;
+  gap: 2px;
+  width: 100%;
+  height: 100%;
+}
+
+/* ✅ Vertical Seats */
+.table-wrapper.vertical .seats {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.seats-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Chair Square */
+.seat {
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border: 2px solid #d90429;
+  border-radius: 3px;
+}
+
+.table-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;   /* Fill only the table */
+  height: 100%;
+  background: transparent;
+  border: none;
+  z-index: 10;
+  border-radius: 6px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* On Hover */
+.table-overlay:hover {
+  background-color: rgba(255, 0, 255, 0.15);
+}
+
+/* On Select */
+.table-overlay.selected {
+  background-color: rgba(255, 0, 255, 0.5);
+}
+
+/* 💻 Desktop version - fixed layout */
+@media (min-width: 1024px) {
+  .booking-scroll {
+    overflow: hidden;
+  }
+
+  .booking-map {
+    pointer-events: none;
+  }
+
+  .table-wrapper,
+  .table-overlay {
+    pointer-events: auto;
+  }
+}
+
+/* ✅ Rotate entire block: table-info + table + overlay */
+.table-wrapper.rotated {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* 🛑 Keep width and height unchanged */
+.table-wrapper.rotated .table,
+.table-wrapper.rotated .table-info {
+  transform: none; /* Don't rotate content back */
+}
+
+/* 💡 This allows scroll and drag on small screens */
+@media (max-width: 1023px) {
+  .booking-scroll {
+    overflow: auto;              /* ✅ allow scroll on mobile */
+    touch-action: pan-x pan-y;   /* ✅ better finger scroll support */
+    -webkit-overflow-scrolling: touch; /* ✅ smooth scroll on iOS */
+  }
+
+  .booking-map {
+    width: 1500px; /* ✅ Fixed large width (won’t shrink to fit) */
+    height: auto;
+  }
+}
+
+/* ✅ Bottom fixed table summary */
+.table-summary {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  color: #fff;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  z-index: 100;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+}
+
+.summary-details {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-next {
+  background-color: #d90429;
+  color: white;
+  padding: 8px 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-next:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.table-overlay.booked {
+  background-color: rgba(255, 0, 0, 0.4); /* Red overlay */
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+#nextButton:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+#nextButton {
+  pointer-events: auto; /* ⭐ Important */
+  cursor: pointer;      /* ⭐ Mouse pointer change */
+  transition: background-color 0.3s ease;
+}
+
+/* 👇 Add this fix to your CSS file */
+@media (max-width: 768px) {
+  .booking-map {
+    padding-bottom: 120px; /* Add space for summary bar */
+  }
+
+  .table-summary {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    z-index: 999;
+    padding: 10px;
+    font-size: 14px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .summary-next-btn {
+    text-align: right;
+    padding-top: 8px;
+  }
+
+  .btn-next {
+    background-color: #d90429 ;
+    color: #fff;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .btn-next:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+  }
+}
+
+
+/* ✅ Customer form styling */
+.form-section {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.customer-form input,
+.customer-form select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.phone-group {
+  display: flex;
+  gap: 10px;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+/* ✅ Date Selector Bar */
+.date-selector {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.date-list {
+  display: flex;
+  gap: 10px;
+  padding: 0 20px;
+  width: max-content;
+}
+
+.date-item {
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: #f0f0f0;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 1px solid #ccc;
+}
+
+.date-item:hover {
+  background: #d90429;
+  color: #fff;
+}
+
+.date-item.active {
+  background: #d90429;
+  color: #fff;
+  border-color: #d90429;
+}
+
+/* Mobile - allow swipe scroll */
+.date-selector::-webkit-scrollbar {
+  display: none;
+}/* 🍽️ Food Panel */
+.food-panel {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: #fff;
+  z-index: 9999;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+  transition: bottom 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.food-panel.open {
+  bottom: 0;
+}
+
+.food-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #d90429;
+  color: #fff;
+  border-radius: 16px 16px 0 0;
+}
+
+.food-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.food-body {
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.food-category h4 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.food-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.food-item button {
+  background: #d90429;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+</style>
+</head>
+<body>
+
+  <!-- ✅ NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/logo.png" alt="Tamilisai Logo" class="logo-img" />
+      <span class="logo-text">Tamilisai</span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="booking.html" class="active">Reserve Table</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+        </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+  <!-- ✅ DATE SELECTOR -->
+<div class="date-selector">
+  <div class="date-list" id="dateList">
+    <!-- Dates will be added dynamically by JS -->
+  </div>
+</div>
+
+
+<!-- ✅ BOOKING MODAL (REQUIRED) -->
+<div id="bookingModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  z-index:9999;
+">
+  <div style="
+    background:#fff;
+    width:320px;
+    margin:15% auto;
+    padding:20px;
+    border-radius:8px;
+    text-align:center;
+  ">
+    <h3>Confirm Booking</h3>
+
+    <input id="custName" placeholder="Name" style="width:100%;margin:8px 0;padding:8px">
+    <input id="custPhone" placeholder="Phone" style="width:100%;margin:8px 0;padding:8px">
+
+    <button id="confirmBooking" style="
+      background:#d90429;
+      color:#fff;
+      border:none;
+      padding:10px 16px;
+      cursor:pointer;
+      width:100%;
+      margin-top:10px;
+    ">
+      Confirm
+    </button>
+  </div>
+</div>
+
+
+  <!-- ✅ BOOKING SECTION -->
+  <main class="booking-section">
+    <h1>Reserve Your Table</h1>
+    <div class="booking-scroll">
+      <div class="booking-map" style="background-image: url('images/tables/layout.png');">
+      <!-- T01–T10 (2 chairs) -->
+<div class="table-wrapper vertical" style="top: 36.62%; left: 73.31%;">
+  <div class="table">
+    <div class="seats seats-vertical">
+      <div class="seat"></div>
+      <div class="seat"></div>  
+    </div>
+    <button class="table-overlay" data-table="T01"></button>
+  </div>
+  <div class="table-info">
+    <span class="table-number">T1</span>
+    <span class="table-price" id="price-T01">Loading...</span>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 63.32%; left: 65.35%;">
+  <div class="table-info">
+    <span class="table-number">T2</span>
+    <span class="table-price" id="price-T02">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-2">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T02"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 63.32%; left: 50.79%;">
+  <div class="table-info">
+    <span class="table-number">T3</span>
+    <span class="table-price" id="price-T03">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-2">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T03"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 63.32%; left: 36.36%;">
+  <div class="table-info">
+    <span class="table-number">T4</span>
+    <span class="table-price" id="price-T04">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-2">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T04"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 63.32%; left: 22.55%;">
+  <div class="table-info">
+    <span class="table-number">T5</span>
+    <span class="table-price" id="price-T05">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-2">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T05"></button>
+  </div>
+</div>
+<div class="table-wrapper vertical" style="top: 44.93%; left: 14.09%;">
+  <div class="table">
+    <div class="seats seats-vertical">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T06"></button>
+  </div>
+  <div class="table-info">
+    <span class="table-number">T6</span>
+    <span class="table-price" id="price-T06">Loading...</span>
+  </div>
+</div>
+<div class="table-wrapper vertical" style="top: 26.01%; left: 14.09%;">
+  <div class="table">
+    <div class="seats seats-vertical">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T07"></button>
+  </div>
+  <div class="table-info">
+    <span class="table-number">T7</span>
+    <span class="table-price" id="price-T07">Loading...</span>
+  </div>
+</div>
+<div class="table-wrapper vertical" style="top: 28.32%; left: 3.76%;">
+  <div class="table">
+    <div class="seats seats-vertical">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T08"></button>
+  </div>
+  <div class="table-info">
+    <span class="table-number">T8</span>
+    <span class="table-price" id="price-T08">Loading...</span>
+  </div>
+</div>
+<div class="table-wrapper vertical" style="top: 46.54%; left: 3.76%;">
+  <div class="table">
+    <div class="seats seats-vertical">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T09"></button>
+  </div>
+  <div class="table-info">
+    <span class="table-number">T9</span>
+    <span class="table-price" id="price-T09">Loading...</span>
+  </div>
+</div>
+<div class="table-wrapper vertical" style="top: 71.86%; left: 3.76%;">
+  <div class="table">
+    <div class="seats seats-3 seats-vertical">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T10"></button>
+  </div>
+  <div class="table-info">
+    <span class="table-number">T10</span>
+    <span class="table-price" id="price-T10">Loading...</span>
+  </div>
+</div>
+
+<!-- T11–T20 (3 chairs) -->
+<div class="table-wrapper" style="top: 93.08%; left: 6.63%;">
+  <div class="table-info">
+    <span class="table-number">T11</span>
+    <span class="table-price" id="price-T11">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T11"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 93.08%; left: 20.81%;">
+  <div class="table-info">
+    <span class="table-number">T12</span>
+    <span class="table-price" id="price-T12">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T12"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 93.08%; left: 34.49%;">
+  <div class="table-info">
+    <span class="table-number">T13</span>
+    <span class="table-price" id="price-T13">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T13"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 93.08%; left: 48.55%;">
+  <div class="table-info">
+    <span class="table-number">T14</span>
+    <span class="table-price" id="price-T14">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T14"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 93.08%; left: 65.72%;">
+  <div class="table-info">
+    <span class="table-number">T15</span>
+    <span class="table-price" id="price-T15">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T15"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 93.08%; left: 81.90%;">
+  <div class="table-info">
+    <span class="table-number">T16</span>
+    <span class="table-price" id="price-T16">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T16"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 79.01%; left: 69.21%;">
+  <div class="table-info">
+    <span class="table-number">T17</span>
+    <span class="table-price" id="price-T17">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T17"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 79.01%; left: 43.83%;">
+  <div class="table-info">
+    <span class="table-number">T18</span>
+    <span class="table-price" id="price-T18">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-3">
+      <div class="seat"></div>
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T18"></button>
+  </div>
+</div>
+<div class="table-wrapper" style="top: 76.93%; left: 27.90%;">
+  <div class="table-info">
+    <span class="table-number">T19</span>
+    <span class="table-price" id="price-T19">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-2">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T19"></button>
+  </div>
+</div>
+<div class="table-wrapper rotated" style="top: 74.86%; left: 12.85%;">
+  <div class="table-info">
+    <span class="table-number">T20</span>
+    <span class="table-price" id="price-T20">Loading...</span>
+  </div>
+  <div class="table">
+    <div class="seats seats-2">
+      <div class="seat"></div>
+      <div class="seat"></div>
+    </div>
+    <button class="table-overlay" data-table="T20"></button>
+  </div>
+</div>
+<!-- ✅ Bottom Bar for Table Summary -->
+<div class="table-summary" id="tableSummary">
+  <div class="summary-details">
+    <span id="tableCount">0 Tables</span> |
+    <span id="tableList">Selected: —</span> |
+    <span id="subtotal">Subtotal: AED 0</span> |
+    <span id="vat">VAT (5%): AED 0</span> |
+    <strong id="grandTotal">Total: AED 0</strong>
+  </div>
+  <button id="nextButton" class="btn-next" disabled>Next</button>
+</div>
+
+      
+    </div>
+    <!-- 🍽️ FOOD ORDER SLIDE PANEL -->
+<div id="foodPanel" class="food-panel">
+  <div class="food-header">
+    <h3>Add Food Items</h3>
+    <button id="closeFood">✕</button>
+  </div>
+
+  <div class="food-body">
+
+    <div class="food-category">
+      <h4>Starters</h4>
+      <div class="food-item">
+        <span>Paneer Tikka</span>
+        <span>AED 120</span>
+        <button data-name="Paneer Tikka" data-price="120">Add</button>
+      </div>
+      <div class="food-item">
+        <span>Chicken 65</span>
+        <span>AED 150</span>
+        <button data-name="Chicken 65" data-price="150">Add</button>
+      </div>
+    </div>
+
+    <div class="food-category">
+      <h4>Main Course</h4>
+      <div class="food-item">
+        <span>Butter Chicken</span>
+        <span>AED 220</span>
+        <button data-name="Butter Chicken" data-price="220">Add</button>
+      </div>
+      <div class="food-item">
+        <span>Veg Biryani</span>
+        <span>AED 180</span>
+        <button data-name="Veg Biryani" data-price="180">Add</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  </main>
+
+  <script src="php/js/booking.js"></script>
+
+    <!-- ✅ SCRIPT -->
+  <script>
+    function toggleMenu() {
+      const navLinks = document.getElementById("navLinks");
+      navLinks.classList.toggle("active");
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById("navLinks").classList.remove("active");
+      });
+    });
+    console.log("date-selector.js loaded (placeholder)");
+  </script>
+  
+
+</body>
+</html>

@@ -1,11 +1,25 @@
 <?php
-include 'config.php';
-require 'assets/PHPMailer.php';
-require 'assets/SMTP.php';
-require 'assets/Exception.php';
-use PHPMailer\PHPMailer\PHPMailer;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$email = $_POST['email'];
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require __DIR__ . '/PHPMailer-master/src/Exception.php';
+require __DIR__ . '/PHPMailer-master/src/PHPMailer.php';
+require __DIR__ . '/PHPMailer-master/src/SMTP.php';
+
+$conn = new mysqli("localhost", "root", "", "auth_db");
+if ($conn->connect_error) {
+    die("DB connection failed");
+}
+
+$email = trim($_POST['email'] ?? '');
+if ($email === '') {
+    echo "Email required";
+    exit;
+}
+
 $otp = rand(100000, 999999);
 
 // Save OTP
@@ -14,22 +28,28 @@ $stmt->bind_param("ss", $otp, $email);
 $stmt->execute();
 $stmt->close();
 
-// Send Email
+// Send email
 $mail = new PHPMailer(true);
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail->SMTPAuth = true;
-$mail->Username = 'kotyadaakhil170@gmail.com'; // Replace with your Gmail
-$mail->Password = 'icfh pyjw jead gtfb';   // Replace with your Gmail App Password
-$mail->SMTPSecure = 'tls';
-$mail->Port = 587;
 
-$mail->setFrom('kotyadaakhil170@gmail.com', 'Auth System');
-$mail->addAddress($email);
-$mail->isHTML(true);
-$mail->Subject = 'Your OTP Code';
-$mail->Body = "<h3>Your OTP is: $otp</h3>";
+try {
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'kotyadaakhil170@gmail.com';
+    $mail->Password   = 'icfh pyjw jead gtfb';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
 
-$mail->send();
-echo "OTP sent to your email.";
-?>
+    $mail->setFrom('kotyadaakhil170@gmail.com', 'OTP Verification');
+    $mail->addAddress($email);
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Your OTP Code';
+    $mail->Body    = "<h2>Your OTP</h2><b>$otp</b>";
+
+    $mail->send();
+    echo "OTP sent successfully";
+
+} catch (Exception $e) {
+    echo "Mail error";
+}
